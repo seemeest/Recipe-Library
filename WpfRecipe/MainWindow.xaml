@@ -1,0 +1,254 @@
+﻿<Window x:Class="WpfRecipe.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfRecipe"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="1000" MaxHeight="550" MaxWidth="1000" HorizontalAlignment="Left">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="6" Name="toolBar">
+            <StackPanel Name="tbc">
+                <TextBlock Width="143" Height="50" Margin="10,10,0,0" Padding="10" FontSize="20" Text="Типы блюд" Name="info" HorizontalAlignment="Left"/>
+                <Button Width="143" Height="50" Margin="10,10,0,0" Content="Типы блюд" Click="typeList" HorizontalAlignment="Left" Name="Typse" />
+                <Button Width="143" Height="50" Margin="10,10,0,0" Content="Рецепты" Click="recipsList" HorizontalAlignment="Left" Name="Recips"/>
+                <Button Width="143" Height="50" Margin="10,10,0,0" Content="Продукты"  HorizontalAlignment="Left" Name="Prod" Click="prodList" />
+                <Button Width="143" Height="50" Margin="10,70,0,0" Content="Добавить рецепт" Click="dobRPanel" HorizontalAlignment="Left" Name="RecipsAdd"/>
+                <Button Width="143" Height="50" Margin="10,10,0,0" Content="Добавить продукт"  HorizontalAlignment="Left" Name="addProdBtn" Click="dobProd" />
+            </StackPanel>
+            <StackPanel.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF8349" Offset="0"/>
+                    <GradientStop Color="#FFC83C" Offset="1"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+        </StackPanel>
+        
+        <ScrollViewer Grid.Column="1" Grid.ColumnSpan="5" Name="recips" VerticalScrollBarVisibility="Auto" Visibility="Hidden">
+            <StackPanel Name="blockR" Background="White">
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer Grid.Column="1" Grid.ColumnSpan="5" Name="typeRecips" VerticalScrollBarVisibility="Auto" Visibility="Visible">
+            <StackPanel Name="blockTR" Background="White">
+            </StackPanel>
+        </ScrollViewer>
+
+        <ScrollViewer Grid.Column="1" Grid.ColumnSpan="5" Name="product" VerticalScrollBarVisibility="Auto" Visibility="Hidden"> <!-- продукты -->
+            <StackPanel Name="blockProd" Background="White">
+
+				<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0 40 0 0">
+					<Grid Margin=" 0 80 0 0 " VerticalAlignment="Top" x:Name="gridControl" >
+						<Grid.RowDefinitions>
+							<RowDefinition >
+
+							</RowDefinition>
+							<RowDefinition >
+
+							</RowDefinition>
+
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions >
+							<ColumnDefinition/>
+							<ColumnDefinition/>
+							
+
+						</Grid.ColumnDefinitions>
+		
+						<TextBlock  Height="30" Margin=" 0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Center"  Text="Название"   Grid.Row="1" Grid.Column="0"/>
+						<TextBlock  Height="30" Margin=" 0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Center"  Text="цена "   Grid.Row="1" Grid.Column="1"/>
+			
+					</Grid>
+				</ScrollViewer>
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Background="White" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,100,0,100" Name="dobavitTR" Visibility="Hidden">
+            <TextBlock Text="Название продукта" HorizontalAlignment="Center" Margin="0,30,0,0" />
+            <Border Margin="0,10,0,0" BorderBrush="Gray" BorderThickness="1" Width="200">
+                <TextBox Name="NameTypeDish"/>
+            </Border>
+            <TextBlock Text="Цена подукта (за 100гр.)" HorizontalAlignment="Center" Margin="0,20,0,0" />
+            <Border Margin="0,10,0,0" BorderBrush="Gray" BorderThickness="1" Width="150">
+                <TextBox Name="NameTypePizDish"/>
+            </Border>
+            <WrapPanel HorizontalAlignment="Center" Margin="0,100,0,0">
+                <Button Width="75" Height="30" Content="Добавить" Margin="0,0,100,0" Click="Button_Click_AddRisept"/>
+                <Button Width="75" Height="30" Content="Выход" Margin="100,0,0,0" Click="recipsList"/>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel Background="White" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,75,0,100" Name="dobavitR" Visibility="Hidden">
+            <TextBlock Text="Название блюда" HorizontalAlignment="Center" Margin="0,30,0,0" />
+            <Border Margin="0,10,0,0" BorderBrush="Gray" BorderThickness="1" Width="200">
+                <TextBox Name="NameDish"/>
+            </Border>
+            <TextBlock Text="Тип блюда" HorizontalAlignment="Center" Margin="0,20,0,0" />
+            <Border Margin="0,10,0,0" BorderBrush="Gray" BorderThickness="1" Width="150">
+                <TextBox Name="NamePizDish"/>
+            </Border>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" Margin="75,50,75,0">
+                <StackPanel Name="InputList">
+                    <WrapPanel Name="NameProduct" Height="19">
+                        <TextBlock Text="Название продукта" Width="130" HorizontalAlignment="Left" Margin="0,1,0,1" />
+                        <WrapPanel Name ="WarpNameProduct">
+                      
+                     
+                            <ComboBox Width="75" Name="MainCombobox"/>
+
+                        </WrapPanel>
+                    </WrapPanel>
+                    <WrapPanel Name="GramsOneP">
+                        <TextBlock Text="Колво гр на 1 порцию" Width="130" HorizontalAlignment="Left"/>
+                        <WrapPanel Name="WarpGramsOneP">
+
+                            
+                            <TextBox Width="75"/>
+
+                        </WrapPanel>
+                    </WrapPanel>
+                 
+                </StackPanel>
+            </ScrollViewer>
+            <WrapPanel HorizontalAlignment="Center">
+                <Button Width="25" Height="25" Content="-" Margin="0,0,0,0" Click="columnDel"/>
+                <Button Width="25" Height="25" Content="+" Margin="0,0,0,0" Click="columnAdd"/>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Center">
+                <Button Width="75" Height="30" Content="Добавить" Margin="0,0,100,0" Click="Button_Click_AddRisept"/>
+                <Button Width="75" Height="30" Content="Выход" Margin="100,0,0,0" Click="recipsList"/>
+            </WrapPanel>
+        </StackPanel>
+        
+        
+        
+
+        <StackPanel Background="White" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,100,0,100" Name="dobavitRRd" Visibility="Hidden">
+            <TextBlock Text="Название блюда" HorizontalAlignment="Center" Margin="0,30,0,0" />
+            <Border Margin="0,10,0,0" BorderBrush="Gray" BorderThickness="1" Width="200">
+                <TextBox Name="NameDishRd"/>
+            </Border>
+            <TextBlock Text="Тип блюда" HorizontalAlignment="Center" Margin="0,20,0,0" />
+            <Border Margin="0,10,0,0" BorderBrush="Gray" BorderThickness="1" Width="150">
+                <TextBox Name="NamePizDishRd"/>
+            </Border>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" Margin="75,30,75,20">
+                <StackPanel Name="InputListRd">
+                    <WrapPanel Name="NameProductRd">
+                        <TextBlock Text="Название продукта" Width="130" HorizontalAlignment="Left" Margin="0,1,0,1" />
+                        <TextBox Width="75"/>
+                    </WrapPanel>
+                    <WrapPanel Name="GramsOnePRd">
+                        <TextBlock Text="Колво гр на 1 порцию" Width="130" HorizontalAlignment="Left"/>
+                        <TextBox Width="75"/>
+                    </WrapPanel>
+                    <WrapPanel Name="PriceAndOneGrammsRd">
+                        <TextBlock Text="Цена (за 100 грамм)" Width="130" HorizontalAlignment="Left"/>
+                        <TextBox Width="75"/>
+                    </WrapPanel>
+                </StackPanel>
+            </ScrollViewer>
+            <WrapPanel HorizontalAlignment="Center">
+                <Button Width="75" Height="30" Content="Изменить" Margin="0,0,100,0" Click="recipsList"/>
+                <!-- СЮДА ПИХАТЬ ФУНКЦИЮ ИЗМЕНЕНИЯ, КОТОРОЙ НЕТ)) !-->
+                <Button Width="75" Height="30" Content="Выход" Margin="100,0,0,0" Click="recipsList"/>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel Background="White" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,100,0,100" Name="dobavitTRRd" Visibility="Hidden">
+            <TextBlock Text="Название типа блюд" HorizontalAlignment="Center" Margin="0,50,0,0" />
+            <Border Margin="0,10,0,0" BorderBrush="Gray" BorderThickness="1" Width="200">
+                <TextBox Name="NameTypeDishRd"/>
+            </Border>
+            <WrapPanel HorizontalAlignment="Center" Margin="0,130,0,0">
+                <Button Width="75" Height="30" Content="Изменить" Margin="0,0,100,0" Click="recipsList"/>
+                <!-- СЮДА ПИХАТЬ ФУНКЦИЮ ИЗМЕНЕНИЯ, КОТОРОЙ НЕТ)) !-->
+                <Button Width="75" Height="30" Content="Выход" Margin="100,0,0,0" Click="recipsList"/>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel Background="White" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,75,0,100" Name="editR" Visibility="Hidden">
+            <TextBlock Text="Название блюда" HorizontalAlignment="Center" Margin="0,15,0,0" />
+            <Border Margin="0,5,0,0" BorderBrush="Gray" BorderThickness="1" Width="200">
+                <TextBox Name="editNameDish"/>
+            </Border>
+            <TextBlock Text="Тип блюда" HorizontalAlignment="Center" Margin="0,10,0,0" />
+            <Border Margin="0,5,0,0" BorderBrush="Gray" BorderThickness="1" Width="150">
+                <TextBox Name="editNamePizDish"/>
+            </Border>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" Margin="75,15,75,0">
+                <StackPanel Name="editInputList">
+                    <WrapPanel Name="editNameProduct">
+                        <TextBlock Text="Название продукта" Width="130" HorizontalAlignment="Left" Margin="0,1,0,1" />
+                        <WrapPanel Name ="editWarpNameProduct">
+
+                            <!--<TextBox Width="75"/>-->
+
+
+                        </WrapPanel>
+                    </WrapPanel>
+                    <WrapPanel Name="editGramsOneP">
+                        <TextBlock Text="Колво гр на 1 порцию" Width="130" HorizontalAlignment="Left"/>
+                        <WrapPanel Name="editWarpGramsOneP">
+
+                            <!--<TextBox Width="75"/>-->
+
+                        </WrapPanel>
+                    </WrapPanel>
+                    <WrapPanel Name="editPriceAndOneGramms">
+                        <TextBlock Text="Цена" Width="130" HorizontalAlignment="Left"/>
+                        <WrapPanel Name="editWarpPriceAndOneGramms">
+
+                            <!--<TextBox Width="75"/>-->
+
+                        </WrapPanel>
+                    </WrapPanel>
+                </StackPanel>
+            </ScrollViewer>
+            <WrapPanel HorizontalAlignment="Center">
+                <Button Width="25" Height="25" Content="-" Margin="0,0,0,15" Click="editcolumnDel"/>
+                <Button Width="25" Height="25" Content="+" Margin="0,0,0,15" Click="editcolumnAdd"/>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Center">
+                <Border Margin="0,5,0,0" BorderBrush="Gray" BorderThickness="1" Width="100"  Height="25">
+                    <TextBox Name="Number_of_servings" Text="Кол-во порций"/>
+                </Border>
+                <Border Margin="0,5,0,0" BorderBrush="Gray" BorderThickness="1" Width="100"  Height="25">
+                    <TextBox Name="Total_price" Text="Общая цена"/>
+                </Border>
+                <Button Width="75" Height="25" Content="Посчитать" Margin="0,5,0,0" Click="calculate"/>
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Center">
+                <Button Width="75" Height="30" Content="Изменить" Margin="0,15,75,0" Name="ButtonEditRec"/>
+                <Button Width="75" Height="30" Content="Выход" Margin="75,15,0,0" Click="editrecipsList"/>
+            </WrapPanel>
+        </StackPanel>
+
+
+
+        <StackPanel Background="White" Grid.Column="1" Grid.ColumnSpan="4" Margin="0,100,0,100" Name="addProd" Visibility="Hidden">
+            <TextBlock Text="Название продукта" HorizontalAlignment="Center" Margin="0,50,0,0" />
+            <Border Margin="0,10,0,0" BorderBrush="Gray" BorderThickness="1" Width="200">
+                <TextBox Name="nameProd"/>
+            </Border>
+            <TextBlock Text="Цена за 100 гр." HorizontalAlignment="Center" Margin="0,15,0,0" />
+            <Border Margin="0,10,0,0" BorderBrush="Gray" BorderThickness="1" Width="200">
+                <TextBox Name="priceProd"/>
+            </Border>
+            <WrapPanel HorizontalAlignment="Center" Margin="0,50,0,0">
+                <Button Width="75" Height="30" Content="Добавить" Margin="0,0,75,0" Click="addOneProduct"/>
+                <Button Width="75" Height="30" Content="Выход" Margin="75,0,0,0" Click="recipsList"/>
+            </WrapPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>
